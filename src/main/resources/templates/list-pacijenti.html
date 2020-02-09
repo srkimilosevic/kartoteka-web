@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pacijenti</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" style="margin-left: 5px;">
+        <h3>Baza podataka pacijenata</h3>
+        <hr>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Ime i Prezime</th>
+                <th>Datum rodjenja</th>
+                <th>Adresa</th>
+                <th>Mesto</th>
+                <th>Telefon</th>
+                <th>Zanimanje</th>
+                <th>PM</th>
+                <th>Licna anamneza</th>
+                <th>Porodicna anamneza</th>
+                <th>Krvna grupa</th>
+                <th>RH</th>
+                <th>Osetljivost na lekove</th>
+                <th>Porodjaj</th>
+                <th>Abortus</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="table : ${pacijenti}">
+                <td th:text = "${table.imePrezime}"/>
+                <td th:text = "${table.datumRodjenja}"/>
+                <td th:text = "${table.adresa}"/>
+                <td th:text = "${table.mesto}"/>
+                <td th:text = "${table.telefon}"/>
+                <td th:text = "${table.zanimanje}"/>
+                <td th:text = "${table.pm}"/>
+                <td th:text = "${table.lAnamneza}"/>
+                <td th:text = "${table.pAnamneza}"/>
+                <td th:text = "${table.krvnaGrupa}"/>
+                <td th:text = "${table.rh}"/>
+                <td th:text = "${table.osetljivost}"/>
+                <td th:text = "${table.porodjaj}"/>
+                <td th:text = "${table.abortus}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
