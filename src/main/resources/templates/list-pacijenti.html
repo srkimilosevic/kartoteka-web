@@ -32,10 +32,12 @@
                 <th>Osetljivost na lekove</th>
                 <th>Porodjaj</th>
                 <th>Abortus</th>
+                <th>Komande</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="table : ${pacijenti}">
+            <tr th:each="table, iterstat : ${pacijenti}">
+
                 <td th:text = "${table.imePrezime}"/>
                 <td th:text = "${table.datumRodjenja}"/>
                 <td th:text = "${table.adresa}"/>
@@ -50,6 +52,11 @@
                 <td th:text = "${table.osetljivost}"/>
                 <td th:text = "${table.porodjaj}"/>
                 <td th:text = "${table.abortus}"/>
+                <td>
+                    <a th:href="@{/pacijenti/pacijent(tableId=${iterstat.index})}"
+                       class="btn btn-info btn-sm">Prikaz</a>
+                </td>
+
             </tr>
             </tbody>
         </table>

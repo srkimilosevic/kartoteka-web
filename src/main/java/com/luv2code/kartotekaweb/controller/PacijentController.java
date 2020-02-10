@@ -1,13 +1,13 @@
 package com.luv2code.kartotekaweb.controller;
 
-import com.luv2code.kartotekaweb.KartotekaWebApplication;
+import com.luv2code.kartotekaweb.entity.Bolest;
 import com.luv2code.kartotekaweb.entity.Pacijent;
 import com.luv2code.kartotekaweb.entity.PersonListWrapper;
-import javafx.scene.control.Alert;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBContext;
@@ -15,7 +15,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.Preferences;
+
 
 @Controller
 @RequestMapping("/pacijenti")
@@ -64,12 +64,7 @@ public class PacijentController {
 
 
         } catch (Exception e) { // catches ANY exception
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load data");
-            alert.setContentText("Could not load data from file:\n" + file.getPath());
-
-            alert.showAndWait();
+            e.printStackTrace();
         }
     }
     @GetMapping("/list")
@@ -77,4 +72,16 @@ public class PacijentController {
         model.addAttribute("pacijenti", pacijenti);
         return "list-pacijenti";
     }
+    @GetMapping("/pacijent")
+    public String getPacijent(@RequestParam("tableId") int id, Model model){
+        Pacijent pacijent= pacijenti.get(id);
+        if(pacijent==null){
+            throw new RuntimeException("Pacijent nije pronadjen");
+        }
+       pacijent.getBolesti();
+        System.out.println(pacijent.getBolesti());
+        model.addAttribute("pacijent", pacijent);
+        return "show-pacijent";
+    }
+
 }

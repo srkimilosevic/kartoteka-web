@@ -1,5 +1,10 @@
 package com.luv2code.kartotekaweb.entity;
 
+import javax.validation.constraints.Max;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import java.util.List;
+
 public class Pacijent {
     private String imePrezime;
     private String datumRodjenja;
@@ -15,6 +20,7 @@ public class Pacijent {
     private String osetljivost;
     private String porodjaj;
     private String abortus;
+    private List<Bolest> bolesti;
 
     public Pacijent(){
 
@@ -149,5 +155,15 @@ public class Pacijent {
 
     public void setAbortus(String abortus) {
         this.abortus = abortus;
+    }
+
+    @XmlElementWrapper(name="bolesti")
+    @XmlElement(name = "bolest")
+    public List<Bolest> getBolesti() {
+        return bolesti;
+    }
+
+    public void setBolesti(List<Bolest> bolesti) {
+        this.bolesti = bolesti;
     }
 }
