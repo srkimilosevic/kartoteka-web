@@ -15,81 +15,88 @@
 <div class="container" style="margin-left: 5px;">
     <h3>Prikaz pacijenta</h3>
     <hr>
-    <table class="table table-borderless" th:object="${pacijent}">
+    <div style="float: left; margin-right: 100px; width: 600px">
+        <table class="table table-borderless" th:object="${pacijent}">
 
-        <tbody>
-        <tr class="border-bottom">
-            <th>Ime i Prezime</th>
-            <td th:text="*{imePrezime}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Datum rodjenja</th>
-            <td th:text="*{datumRodjenja}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Adresa</th>
-            <td th:text="*{adresa}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Mesto</th>
-            <td th:text="*{mesto}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Telefon</th>
-            <td th:text="*{telefon}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Zanimanje</th>
-            <td th:text="*{zanimanje}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>PM</th>
-            <td th:text="*{pm}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Licna anamneza</th>
-            <td th:text="*{lAnamneza}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Porodicna anamneza</th>
-            <td th:text="*{pAnamneza}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Krvna grupa</th>
-            <td th:text="*{krvnaGrupa}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>RH</th>
-            <td th:text="*{rh}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Osetljivost na lekove</th>
-            <td th:text="*{osetljivost}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Porodjaj</th>
-            <td th:text="*{porodjaj}"/>
-        </tr>
-        <tr class="border-bottom">
-            <th>Abortus</th>
-            <td th:text="*{abortus}"/>
-        </tr>
-        </tbody>
-    </table>
-    <h3>Istorija pregleda</h3>
-    <hr>
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <th>Vrsta pregleda</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="table, iterstat : ${pacijent.getBolesti()}">
-            <td th:text = "${table.vrstaPregledaBolest}"/>
-        </tr>
-        </tbody>
-    </table>
+            <tbody>
+            <tr class="border-bottom">
+                <th>Ime i Prezime</th>
+                <td th:text="*{imePrezime}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Datum rodjenja</th>
+                <td th:text="*{datumRodjenja}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Adresa</th>
+                <td th:text="*{adresa}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Mesto</th>
+                <td th:text="*{mesto}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Telefon</th>
+                <td th:text="*{telefon}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Zanimanje</th>
+                <td th:text="*{zanimanje}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>PM</th>
+                <td th:text="*{pm}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Licna anamneza</th>
+                <td th:text="*{lAnamneza}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Porodicna anamneza</th>
+                <td th:text="*{pAnamneza}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Krvna grupa</th>
+                <td th:text="*{krvnaGrupa}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>RH</th>
+                <td th:text="*{rh}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Osetljivost na lekove</th>
+                <td th:text="*{osetljivost}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Porodjaj</th>
+                <td th:text="*{porodjaj}"/>
+            </tr>
+            <tr class="border-bottom">
+                <th>Abortus</th>
+                <td th:text="*{abortus}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="float: left; width: 400px">
+        <h3>Istorija pregleda</h3>
+        <hr>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Vrsta pregleda</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="table, iterstat : ${pacijent.getBolesti()}">
+                <td th:text = "${table.vrstaPregledaBolest}"/>
+            </tr>
+            </tbody>
+        </table>
+        <br><br>
+            <a th:href="@{/pacijenti/list}" class="button btn-dark btn-lg">Nazad</a>
+
+    </div>
 </div>
 
 </body>

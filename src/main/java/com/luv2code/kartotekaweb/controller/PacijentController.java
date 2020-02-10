@@ -3,6 +3,7 @@ package com.luv2code.kartotekaweb.controller;
 import com.luv2code.kartotekaweb.entity.Bolest;
 import com.luv2code.kartotekaweb.entity.Pacijent;
 import com.luv2code.kartotekaweb.entity.PersonListWrapper;
+import javafx.collections.transformation.FilteredList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
+import javax.management.Query;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Filter;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -82,6 +86,24 @@ public class PacijentController {
         System.out.println(pacijent.getBolesti());
         model.addAttribute("pacijent", pacijent);
         return "show-pacijent";
+    }
+    @GetMapping("/search")
+    public String search(@RequestParam("searchName") String searchName, Model model){
+
+        List<Pacijent> result = new ArrayList<>();
+
+        for(int i=0; i<pacijenti.size(); i++){
+            if(pacijenti.get(i).getImePrezime().toLowerCase().contains(searchName.toLowerCase().trim())){
+                result.add(pacijenti.get(i));
+            }
+        }
+        if(result!=null){
+            model.addAttribute("pacijenti", result);
+        }else{
+            model.addAttribute("pacijenti", pacijenti);
+        }
+
+        return "list-pacijenti";
     }
 
 }

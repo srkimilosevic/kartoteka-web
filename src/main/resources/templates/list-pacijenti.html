@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Pacijenti</title>
@@ -15,6 +16,12 @@
     <div class="container" style="margin-left: 5px;">
         <h3>Baza podataka pacijenata</h3>
         <hr>
+        <form th:action="@{search}" method="get">
+            Pretrazi pacijenta:<input class="form-control mb-4 col-4" type="search" name="searchName"
+                                      placeholder="Pretrazi po imenu" style="display: inline;
+                                      margin-left: 15px">
+            <button class="btn btn-info mb-2" type="submit">Pretrazi</button>
+        </form>
         <table class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
             <tr>
