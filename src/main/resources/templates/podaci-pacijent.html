@@ -19,8 +19,6 @@
     <p class="h4 mb-4">Nov pacijent</p>
     <form action="#" th:action="@{save}"
           th:object="${pacijent}" method="post">
-        <!--Add hidden symbol-->
-        <input type="hidden" th:field="*{}"/>
 
         <input type="text" th:field="*{imePrezime}"
                class="form-control mb-4 col-4" placeholder="Ime i prezime">

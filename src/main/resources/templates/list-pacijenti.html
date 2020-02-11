@@ -68,13 +68,20 @@
                     <table class="table table-borderless mb-0">
                         <tbody>
                         <tr>
-                            <td>
+                            <td style="padding-right: 2px; padding-left: 2px">
                                 <a th:href="@{/pacijenti/pacijent(tableId=${iterstat.index})}"
                                    class="btn btn-info btn-sm">Prikaz</a>
                             </td>
-                            <td>
+                            <td style="padding-right: 2px; padding-left: 2px">
                                 <a th:href="@{/pacijenti/showFormForUpdate(tableId=${iterstat.index})}"
                                    class="btn btn-secondary btn-sm">Izmeni</a>
+                            </td>
+                            <td style="padding-right: 2px; padding-left: 2px">
+                                <a th:href="@{/pacijenti/delete(tableId=${iterstat.index})}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="if (!(confirm('DA LI STE SIGURNI DA ZELITE DA IZBRISETE OVOG PACIJENTA?')))
+                                                    return false">Delete</a>
+
                             </td>
                         </tr>
                         </tbody>

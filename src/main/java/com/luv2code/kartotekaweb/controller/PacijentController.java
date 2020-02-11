@@ -22,6 +22,7 @@ public class PacijentController {
     private List<Pacijent> pacijenti;
     private File file = new File("E:\\Spring kurs\\kartoteka.xml");
     public List<Pacijent> result;
+    public int updateInd=-1;
 
     /*
     public File getPersonFilePath() {
@@ -114,8 +115,59 @@ public class PacijentController {
         return "podaci-pacijent";
     }
     @PostMapping("/save")
-    public String savePacijent(@ModelAttribute("pacijent") Pacijent pacijent, Model model){
-        pacijenti.add(pacijent);
+    public String savePacijent(@ModelAttribute("pacijent") Pacijent pacijent){
+        if(updateInd>=0){
+            pacijenti.set(updateInd, pacijent);
+        }else {
+            pacijenti.add(pacijent);
+        }
+        savePacijentiDatabase(pacijenti);
+        result=pacijenti;
+        updateInd=-1;
+
+        return "redirect:/pacijenti/list";
+    }
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("tableId") int id, Model model){
+        Pacijent pacijent;
+
+        if(result!=null){
+            pacijent = result.get(id);
+            for(int i=0; i<pacijenti.size(); i++){
+                if(pacijenti.get(i).equals(pacijent)){
+                    updateInd=i;
+                }
+            }
+        }else {
+            pacijent = pacijenti.get(id);
+            updateInd=id;
+        }
+
+        model.addAttribute("pacijent", pacijent);
+        return "podaci-pacijent";
+    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam("tableId") int id){
+        Pacijent pacijent;
+
+        if(result!=null){
+            pacijent = result.get(id);
+            for(int i=0; i<pacijenti.size(); i++){
+                if(pacijenti.get(i).equals(pacijent)){
+                    updateInd=i;
+                }
+            }
+        }else {
+            updateInd=id;
+        }
+        pacijenti.remove(pacijenti.get(updateInd));
+        savePacijentiDatabase(pacijenti);
+        result=pacijenti;
+        updateInd=-1;
+
+        return "redirect:/pacijenti/list";
+    }
+    public void savePacijentiDatabase(List<Pacijent> lista){
         try {
             JAXBContext context = JAXBContext
                     .newInstance(PersonListWrapper.class);
@@ -123,26 +175,13 @@ public class PacijentController {
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             PersonListWrapper wrapper = new PersonListWrapper();
-            wrapper.setPacijenti(pacijenti);
+            wrapper.setPacijenti(lista);
 
             m.marshal(wrapper, file);
 
         } catch (Exception e){
             e.printStackTrace();
         }
-        model.addAttribute("pacijenti", pacijenti);
-        return "list-pacijenti";
-    }
-    @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("tableId") int id, Model model){
-        Pacijent pacijent;
-        if(result!=null){
-            pacijent = result.get(id);
-        }else {
-            pacijent = pacijenti.get(id);
-        }
-        model.addAttribute("pacijent", pacijent);
-        return "podaci-pacijent";
     }
 
 }
