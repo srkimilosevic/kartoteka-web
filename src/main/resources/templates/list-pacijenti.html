@@ -14,13 +14,18 @@
 </head>
 <body>
     <div class="container" style="margin-left: 5px;">
+        <br>
         <h3>Baza podataka pacijenata</h3>
         <hr>
-        <form th:action="@{search}" method="get">
-            Pretrazi pacijenta:<input class="form-control mb-4 col-4" type="search" name="searchName"
+        <form th:action="@{search}" method="get" class="form-inline">
+            <a th:href="@{/pacijenti/showFormForAdd}"
+               class="btn btn-primary mr-5 mb-4">
+                Dodaj pacijenta
+            </a>
+            <input class="form-control mb-4 col-4" type="search" name="searchName"
                                       placeholder="Pretrazi po imenu" style="display: inline;
                                       margin-left: 15px">
-            <button class="btn btn-info mb-2" type="submit">Pretrazi</button>
+            <button class="btn btn-success mb-4" type="submit">Pretrazi</button>
         </form>
         <table class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
@@ -60,10 +65,20 @@
                 <td th:text = "${table.porodjaj}"/>
                 <td th:text = "${table.abortus}"/>
                 <td>
-                    <a th:href="@{/pacijenti/pacijent(tableId=${iterstat.index})}"
-                       class="btn btn-info btn-sm">Prikaz</a>
-                </td>
-
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a th:href="@{/pacijenti/pacijent(tableId=${iterstat.index})}"
+                                   class="btn btn-info btn-sm">Prikaz</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/pacijenti/showFormForUpdate(tableId=${iterstat.index})}"
+                                   class="btn btn-secondary btn-sm">Izmeni</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
             </tr>
             </tbody>
         </table>

@@ -94,7 +94,10 @@
             </tbody>
         </table>
         <br><br>
-            <a th:href="@{/pacijenti/list}" class="button btn-dark btn-lg">Nazad</a>
+            <form>
+                <input type="button" value="Nazad" onclick="history.back()" class="btn btn-dark btn-lg">
+            </form>
+           <!-- <a th:href="@{/pacijenti/list}" class="button btn-dark btn-lg">Nazad</a> -->
 
     </div>
 </div>

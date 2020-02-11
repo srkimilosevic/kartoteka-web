@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Unos pacijenta</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <br>
+    <h3>Podaci o pacijentu</h3>
+    <hr>
+    <p class="h4 mb-4">Nov pacijent</p>
+    <form action="#" th:action="@{save}"
+          th:object="${pacijent}" method="post">
+        <!--Add hidden symbol-->
+        <input type="hidden" th:field="*{}"/>
+
+        <input type="text" th:field="*{imePrezime}"
+               class="form-control mb-4 col-4" placeholder="Ime i prezime">
+        <input type="text" th:field="*{datumRodjenja}"
+               class="form-control mb-4 col-4" placeholder="Datum rodjenja">
+        <input type="text" th:field="*{adresa}"
+               class="form-control mb-4 col-4" placeholder="Adresa">
+        <input type="text" th:field="*{mesto}"
+               class="form-control mb-4 col-4" placeholder="Mesto">
+        <input type="text" th:field="*{telefon}"
+               class="form-control mb-4 col-4" placeholder="Telefon">
+        <input type="text" th:field="*{zanimanje}"
+               class="form-control mb-4 col-4" placeholder="Zanimanje">
+        <input type="text" th:field="*{pm}"
+               class="form-control mb-4 col-4" placeholder="Poslednja menstruacija">
+        <input type="text" th:field="*{lAnamneza}"
+               class="form-control mb-4 col-4" placeholder="Licna anamneza">
+        <input type="text" th:field="*{pAnamneza}"
+               class="form-control mb-4 col-4" placeholder="Porodicna anamneza">
+        <input type="text" th:field="*{krvnaGrupa}"
+               class="form-control mb-4 col-4" placeholder="Krvna grupa">
+        <input type="text" th:field="*{rh}"
+               class="form-control mb-4 col-4" placeholder="RH">
+        <input type="text" th:field="*{osetljivost}"
+               class="form-control mb-4 col-4" placeholder="Osetljivost na lekove">
+        <input type="text" th:field="*{porodjaj}"
+               class="form-control mb-4 col-4" placeholder="Porodjaja">
+        <input type="text" th:field="*{abortus}"
+               class="form-control mb-4 col-4" placeholder="Abortusa">
+
+        <button type="submit" class="btn btn-info col-2">Sacuvaj</button>
+    </form>
+    <hr>
+    <form>
+        <input type="button" value="Nazad" onclick="history.back()" class="btn btn-dark btn-lg">
+    </form>
+</div>
+
+</body>
+</html>

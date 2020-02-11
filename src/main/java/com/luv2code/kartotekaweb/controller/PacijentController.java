@@ -3,22 +3,17 @@ package com.luv2code.kartotekaweb.controller;
 import com.luv2code.kartotekaweb.entity.Bolest;
 import com.luv2code.kartotekaweb.entity.Pacijent;
 import com.luv2code.kartotekaweb.entity.PersonListWrapper;
-import javafx.collections.transformation.FilteredList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.management.Query;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Filter;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -26,6 +21,7 @@ import java.util.stream.Collectors;
 public class PacijentController {
     private List<Pacijent> pacijenti;
     private File file = new File("E:\\Spring kurs\\kartoteka.xml");
+    public List<Pacijent> result;
 
     /*
     public File getPersonFilePath() {
@@ -73,12 +69,18 @@ public class PacijentController {
     }
     @GetMapping("/list")
     public String listAll(Model model){
+
         model.addAttribute("pacijenti", pacijenti);
         return "list-pacijenti";
     }
     @GetMapping("/pacijent")
     public String getPacijent(@RequestParam("tableId") int id, Model model){
-        Pacijent pacijent= pacijenti.get(id);
+        Pacijent pacijent;
+        if(result!=null){
+            pacijent = result.get(id);
+        }else {
+            pacijent = pacijenti.get(id);
+        }
         if(pacijent==null){
             throw new RuntimeException("Pacijent nije pronadjen");
         }
@@ -90,7 +92,7 @@ public class PacijentController {
     @GetMapping("/search")
     public String search(@RequestParam("searchName") String searchName, Model model){
 
-        List<Pacijent> result = new ArrayList<>();
+         result = new ArrayList<>();
 
         for(int i=0; i<pacijenti.size(); i++){
             if(pacijenti.get(i).getImePrezime().toLowerCase().contains(searchName.toLowerCase().trim())){
@@ -104,6 +106,43 @@ public class PacijentController {
         }
 
         return "list-pacijenti";
+    }
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model){
+        Pacijent pacijent = new Pacijent();
+        model.addAttribute("pacijent", pacijent);
+        return "podaci-pacijent";
+    }
+    @PostMapping("/save")
+    public String savePacijent(@ModelAttribute("pacijent") Pacijent pacijent, Model model){
+        pacijenti.add(pacijent);
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(PersonListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            PersonListWrapper wrapper = new PersonListWrapper();
+            wrapper.setPacijenti(pacijenti);
+
+            m.marshal(wrapper, file);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        model.addAttribute("pacijenti", pacijenti);
+        return "list-pacijenti";
+    }
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("tableId") int id, Model model){
+        Pacijent pacijent;
+        if(result!=null){
+            pacijent = result.get(id);
+        }else {
+            pacijent = pacijenti.get(id);
+        }
+        model.addAttribute("pacijent", pacijent);
+        return "podaci-pacijent";
     }
 
 }
