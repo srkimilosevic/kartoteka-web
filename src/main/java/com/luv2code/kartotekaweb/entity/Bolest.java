@@ -1,6 +1,9 @@
 package com.luv2code.kartotekaweb.entity;
 
+import com.luv2code.kartotekaweb.controller.PacijentController;
+
 public class Bolest {
+    private Pacijent pacijent;
     private String datumPregledaBolest, vrstaPregledaBolest;
     private String usgList;
     private String spekulaOpList;
@@ -527,6 +530,14 @@ public class Bolest {
 
     public void setPreporukaEuz2List(String preporukaEuz2List) {
         this.preporukaEuz2List = preporukaEuz2List;
+    }
+
+    public void setPacijent(Pacijent pacijent) {
+        this.pacijent = pacijent;
+    }
+
+    public Pacijent getPacijent() {
+        return pacijent;
     }
 
     @Override

@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
+    <link rel="icon" href="https://img.icons8.com/cotton/64/000000/group-folder.png">
 </head>
 <body>
 <div class="container" style="margin-left: 5px;">
+    <br>
     <h3>Prikaz pacijenta</h3>
     <hr>
     <div style="float: left; margin-right: 100px; width: 600px">
@@ -84,12 +86,26 @@
         <table class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
             <tr>
+                <th>Datum pregleda</th>
                 <th>Vrsta pregleda</th>
+                <th>Komande</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="table, iterstat : ${pacijent.getBolesti()}">
+                <td th:text="${table.datumPregledaBolest}"/>
                 <td th:text = "${table.vrstaPregledaBolest}"/>
+                <td style="padding-top: 10px; padding-bottom: 10px">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                        <tr>
+                            <td style="padding-right: 2px; padding-left: 2px; padding-bottom: 0px; padding-top: 0px">
+                                <a th:href="@{/pacijenti/pacijent/pregled(tableId=${iterstat.index})}"
+                                   class="btn btn-info btn-sm">Prikaz</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
             </tr>
             </tbody>
         </table>

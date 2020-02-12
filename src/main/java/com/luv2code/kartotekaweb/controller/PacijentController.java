@@ -23,30 +23,7 @@ public class PacijentController {
     private File file = new File("E:\\Spring kurs\\kartoteka.xml");
     public List<Pacijent> result;
     public int updateInd=-1;
-
-    /*
-    public File getPersonFilePath() {
-        Preferences prefs = Preferences.userNodeForPackage(KartotekaWebApplication.class);
-        String filePath = prefs.get("filePath", null);
-        if (filePath != null) {
-            return new File(filePath);
-        } else {
-            return null;
-        }
-    }
-
-    public void setPersonFilePath(File file) {
-        Preferences prefs = Preferences.userNodeForPackage(KartotekaWebApplication.class);
-        this.file=file;
-        if (file != null) {
-            prefs.put("filePath", file.getPath());
-
-        } else {
-            prefs.remove("filePath");
-
-        }
-    }
-    */
+    public Pacijent selectedPacijent;
 
 
     @PostConstruct
@@ -86,7 +63,8 @@ public class PacijentController {
             throw new RuntimeException("Pacijent nije pronadjen");
         }
        pacijent.getBolesti();
-        System.out.println(pacijent.getBolesti());
+        selectedPacijent=pacijent;
+
         model.addAttribute("pacijent", pacijent);
         return "show-pacijent";
     }
@@ -181,6 +159,23 @@ public class PacijentController {
 
         } catch (Exception e){
             e.printStackTrace();
+        }
+    }
+    @GetMapping("/pacijent/pregled")
+    public String getBolest(@RequestParam("tableId") int id, Model model){
+        Bolest bolest = selectedPacijent.getBolesti().get(id);
+        bolest.setPacijent(selectedPacijent);
+        if(bolest==null){
+            System.out.println("Nema!!!!!!!!!!");
+        }else
+        System.out.println(bolest);
+        model.addAttribute("bolest", bolest);
+        if(bolest.getVrstaPregledaBolest().equals("OP")) {
+            return "show-bolest-OP";
+        }else if(bolest.getVrstaPregledaBolest().equals("EUZ1")){
+            return "show-bolest-EUZ1";
+        }else{
+            return "show-bolest-EUZ2";
         }
     }
 
