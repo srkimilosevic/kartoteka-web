@@ -36,20 +36,76 @@
     <br>
     <h4><center>NALAZ LEKARA SPECIJALISTE</center></h4>
     <hr>
-    <div style="float: left; margin-right: 100px; width: 600px">
+    <div style="float: left; margin-right: 80px; width: 400px">
         <table class="table table-borderless" th:object="${bolest}">
 
             <tbody>
-            <tr class="border-bottom">
-                <th>Vrsta pregleda</th>
-                <td th:text="*{vrstaPregledaBolest}"/>
-            </tr>
-            <tr class="border-bottom">
-                <th>Ime i prezime</th>
+            <tr>
+                <th>Ime i prezime:</th>
                 <td th:text="*{pacijent.imePrezime}"/>
+            </tr>
+            <tr>
+                <th>Datum rodjenja:</th>
+                <td th:text="*{pacijent.datumRodjenja}"/>
+            </tr>
+            <tr>
+                <th>Adresa:</th>
+                <td th:text="*{pacijent.adresa}"/>
+            </tr>
+            <tr>
+                <th>Mesto:</th>
+                <td th:text="*{pacijent.mesto}"/>
+            </tr>
+            <tr>
+                <th>Krvna grupa:</th>
+                <td th:text="*{pacijent.krvnaGrupa}"/>
+            </tr>
+            <tr>
+                <th>RH faktor:</th>
+                <td th:text="*{pacijent.rh}"/>
+            </tr>
+            <tr>
+                <th>Osetljivost na lekove:</th>
+                <td th:text="*{pacijent.osetljivost}"/>
             </tr>
             </tbody>
         </table>
+    </div>
 
+    <div style="float: left; margin-right: 10px; width: 400px">
+        <table class="table table-borderless" th:object="${bolest}">
+
+            <tbody>
+            <tr>
+                <th>PM:</th>
+                <td th:text="*{pacijent.pm}"/>
+            </tr>
+            <tr>
+                <th>Telefon:</th>
+                <td th:text="*{pacijent.telefon}"/>
+            </tr>
+            <tr>
+                <th>Zanimanje:</th>
+                <td th:text="*{pacijent.zanimanje}"/>
+            </tr>
+            <tr>
+                <th>Porodjaja:</th>
+                <td th:text="*{pacijent.porodjaj}"/>
+            </tr>
+            <tr>
+                <th>Abortusa:</th>
+                <td th:text="*{pacijent.abortus}"/>
+            </tr>
+            <tr>
+                <th>Licna anamneza:</th>
+                <td th:text="*{pacijent.lAnamneza}"/>
+            </tr>
+            <tr>
+                <th>Porodicna anamneza:</th>
+                <td th:text="*{pacijent.pAnamneza}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

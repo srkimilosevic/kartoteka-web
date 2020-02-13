@@ -14,6 +14,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -24,6 +25,7 @@ public class PacijentController {
     public List<Pacijent> result;
     public int updateInd=-1;
     public Pacijent selectedPacijent;
+    public List<Bolest> bolestiSelektovanogPacijenta;
 
 
     @PostConstruct
@@ -62,7 +64,7 @@ public class PacijentController {
         if(pacijent==null){
             throw new RuntimeException("Pacijent nije pronadjen");
         }
-       pacijent.getBolesti();
+
         selectedPacijent=pacijent;
 
         model.addAttribute("pacijent", pacijent);
@@ -88,17 +90,21 @@ public class PacijentController {
     }
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model){
+        updateInd=-1;
         Pacijent pacijent = new Pacijent();
         model.addAttribute("pacijent", pacijent);
         return "podaci-pacijent";
     }
     @PostMapping("/save")
     public String savePacijent(@ModelAttribute("pacijent") Pacijent pacijent){
+
         if(updateInd>=0){
             pacijenti.set(updateInd, pacijent);
+            pacijent.setBolesti(bolestiSelektovanogPacijenta);
         }else {
             pacijenti.add(pacijent);
         }
+
         savePacijentiDatabase(pacijenti);
         result=pacijenti;
         updateInd=-1;
@@ -121,6 +127,7 @@ public class PacijentController {
             updateInd=id;
         }
 
+        bolestiSelektovanogPacijenta=pacijent.getBolesti();
         model.addAttribute("pacijent", pacijent);
         return "podaci-pacijent";
     }
@@ -146,6 +153,7 @@ public class PacijentController {
         return "redirect:/pacijenti/list";
     }
     public void savePacijentiDatabase(List<Pacijent> lista){
+
         try {
             JAXBContext context = JAXBContext
                     .newInstance(PersonListWrapper.class);
@@ -164,12 +172,11 @@ public class PacijentController {
     @GetMapping("/pacijent/pregled")
     public String getBolest(@RequestParam("tableId") int id, Model model){
         Bolest bolest = selectedPacijent.getBolesti().get(id);
+
         bolest.setPacijent(selectedPacijent);
-        if(bolest==null){
-            System.out.println("Nema!!!!!!!!!!");
-        }else
-        System.out.println(bolest);
+
         model.addAttribute("bolest", bolest);
+
         if(bolest.getVrstaPregledaBolest().equals("OP")) {
             return "show-bolest-OP";
         }else if(bolest.getVrstaPregledaBolest().equals("EUZ1")){
