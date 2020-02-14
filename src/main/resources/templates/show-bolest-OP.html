@@ -107,5 +107,59 @@
             </tbody>
         </table>
     </div>
+
+    <div style="width: 900px">
+
+        <table class="table table-borderless" th:object="${bolest}">
+            <tbody>
+            <tr class="border-top">
+                <th width="200px">Ultrasonografski nalaz:</th>
+                <td th:text="*{usgList}"/>
+
+            </tr>
+            <br>
+            <tr>
+                <th>Nalaz u spekulama:</th>
+                <td th:text="*{spekulaOpList}"/>
+            </tr>
+            <br>
+            <tr>
+                <th>Ginekološki palpatorni pregled:</th>
+                <td th:text="*{ginekoloskiOpList}"/>
+            </tr>
+            <br>
+            <tr>
+                <th>Dijagnoza:</th>
+                <td th:text="*{dijagnozaOpList}"/>
+            </tr>
+            <tr>
+                <th>Krvna grupa:</th>
+                <td th:text="*{pacijent.krvnaGrupa}"/>
+            </tr>
+            <tr>
+                <th>RH faktor:</th>
+                <td th:text="*{pacijent.rh}"/>
+            </tr>
+            <br>
+            <tr>
+                <th>Terapija:</th>
+                <td th:text="*{terapijaOpList}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    Pacijentkinja obaveštena u skladu sa čl. 11. i 16. zakona o pravima pacijenta.
+    <br><br>
+    <table class="table table-borderless" th:object="${bolest}">
+        <tbody>
+        <tr>
+            <td width="85px" style="padding-right: 0px">Novi Sad,</td>
+            <td th:text="*{datumPregledaBolest}" style="float: left; padding-left: 0px"></td>
+            <td style="float: right;  margin-right: 100px">Prim. Milošević Stevan, dr.sci.med.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
