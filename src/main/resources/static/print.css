@@ -16,3 +16,12 @@
         width: 100%;
     }
 }
+@media print {
+    #printPageButton {
+        display: none;
+    }
+    #header{
+        display: none !important;
+    }
+}
+

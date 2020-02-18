@@ -11,19 +11,167 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
     <link rel="icon" href="https://img.icons8.com/cotton/64/000000/group-folder.png">
+    <link rel="stylesheet" href="print.css"/>
+
+    <style type="text/css" media="print">
+        @page {
+            size: auto;   /* auto is the initial value */
+            margin: 0;  /* this affects the margin in the printer settings */
+        }
+    </style>
 </head>
 <body>
-<div class="container" style="margin-left: 5px;">
+
+<p class="container" style="margin-left: 5px;">
+    <div class="canvas_container">
+        <canvas height="0px" width="0px" id="canvas1"></canvas>
+
+        <img src="/memorandum.jpg" style="
+        position: relative;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        width: 95%;"/>
+    </div>
     <br>
-    <h3>NALAZ LEKARA SPECIJALISTE</h3>
-    <hr>
-    <div style="float: left; margin-right: 100px; width: 600px">
-        <table class="table table-borderless" th:object="${bolest}">
+    <h4><center>CILJANI AKUŠERSKI ULTRAZVUČNI PREGLED 1</center></h4>
+    <hr width="900px">
+    <div style="float: left; margin-right: 80px; width: 400px">
+        <table class="table table-borderless" th:object="${bolest}" style="margin-left: 40px">
 
             <tbody>
-            <tr class="border-bottom">
-                <th>Vrsta pregleda</th>
-                <td th:text="*{vrstaPregledaBolest}"/>
+            <tr>
+                <th style="width: 140px">Ime i prezime:</th>
+                <td th:text="*{pacijent.imePrezime}"/>
             </tr>
+            <tr>
+                <th>PM:</th>
+                <td th:text="*{pacijent.pm}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="float: left; margin-right: 10px; width: 400px">
+        <table class="table table-borderless" th:object="${bolest}" >
+
+            <tbody>
+            <tr>
+                <th style="width: 130px">Vtp:</th>
+                <td th:text="*{vtpEuz1List}"/>
+            </tr>
+            <tr>
+                <th>TM trudnice:</th>
+                <td th:text="*{tmEuz1List}"/>
+            </tr>
+            <tr>
+                <th>TA trudnice:</th>
+                <td th:text="*{taEuz1List}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 2. tabela-->
+    <div style="float: left; width: 900px; margin-top: 30px">
+        <table class="table table-borderless" th:object="${bolest}" style="margin-left: 40px;
+                                    margin-bottom: 30px">
+
+            <tbody>
+            <tr>
+                <th style="width: 50px">CRL:</th>
+                <td th:text="*{crlEuz1List}" style="width: 140px"/>
+                <th style="width: 50px">HC:</th>
+                <td th:text="*{hcEuz1List}" style="width: 140px"/>
+                <th style="width: 50px">NB:</th>
+                <td th:text="*{nbEuz1List}" style="width: 140px"/>
+                <th>Količ. plod. teč.:</th>
+                <td th:text="*{kolPTEuz1List}" style="width: 140px"/>
+            </tr>
+            <tr>
+                <th>BPD:</th>
+                <td th:text="*{bpdEuz1List}" align="left"/>
+                <th>FL:</th>
+                <td th:text="*{flEuz1List}"/>
+                <th>PKDV:</th>
+                <td th:text="*{pkdvEuz1List}"/>
+                <th>Inserc. trofob.:</th>
+                <td th:text="*{insercTrobEuz1List}"/>
+            </tr>
+            <tr>
+                <th>Hem:</th>
+                <td th:text="*{hemEuz1List}"/>
+                <th>AC:</th>
+                <td th:text="*{acEuz1List}"/>
+                <th>TSR:</th>
+                <td th:text="*{tsrEuz1List}"/>
+                <th>Dinamika pokreta ploda:</th>
+                <td th:text="*{dinPokEuz1List}"/>
+            </tr>
+            <tr>
+                <th>OFD:</th>
+                <td th:text="*{ofdEuz1List}"/>
+                <th>NT:</th>
+                <td th:text="*{ntEuz1List}"/>
+                <th>FHR+:</th>
+                <td th:text="*{fhrEuz1List}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<!-- 3. tabela-->
+    <div style="width: 900px">
+        <table class="table table-borderless" th:object="${bolest}" style="margin-left: 40px">
+            <tbody>
+            <tr class="border-top">
+                <th width="130px">Sagledani su:</th>
+                <td th:text="*{sagledanoEuz1List}"/>
+            </tr>
+
+            <tr>
+                <th style="padding-top: 30px">Dijagnoza:</th>
+                <td th:text="*{dijagnozaEuz1List}" style="padding-top: 30px"/>
+            </tr>
+
+            <tr>
+                <th style="padding-top: 30px">Terapija:</th>
+                <td th:text="*{terapijaEuz1List}" style="padding-top: 30px"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+<div style="width: 900px">
+    <table class="table table-bordered" style="margin-left: 50px; border: 1px double black">
+        <tbody>
+        <tr>
+            <td align="justify"><i>
+        NAPOMENA:  Ultrazvučni pregled ima
+        svoja ograničenja, kako od strane aparata, tako i od strane operatera, habitusa majke i
+        položaja ploda. Normalan nalaz ultrazvučnog pregleda ne predstavlja garanciju normalnog
+        kariotipa ili izostanka morfoloških poremećaja koji se u datoj gestaciji ne mogu videti kao
+        ni budućeg razvitka poremećaja u kasnijoj trudnoći. Pacijentkinja obaveštena u skladu sa
+                članom 11. i 16. Zakona o pravima pacijenta.</i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+    <table class="table table-borderless" th:object="${bolest}" style="margin-left: 40px">
+        <tbody>
+        <tr>
+            <td width="85px" style="padding-right: 0px">Novi Sad,</td>
+            <td th:text="*{datumPregledaBolest}" style="float: left; padding-left: 0px"></td>
+            <td style="float: right;  margin-right: 100px">Prim. Milošević Stevan, dr.sci.med.</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <form>
+        <center><input type="button" value="Print" onclick="this.style.display='none';
+                    window.print()" class="btn btn-dark btn-lg"></center>
+    </form>
+</div>
+</div>
 </body>
 </html>

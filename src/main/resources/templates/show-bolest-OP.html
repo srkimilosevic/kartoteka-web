@@ -37,7 +37,7 @@
     <h4><center>NALAZ LEKARA SPECIJALISTE</center></h4>
     <hr>
     <div style="float: left; margin-right: 80px; width: 400px">
-        <table class="table table-borderless" th:object="${bolest}">
+        <table class="table table-borderless" th:object="${bolest}" style="margin-left: 30px">
 
             <tbody>
             <tr>
@@ -110,48 +110,40 @@
 
     <div style="width: 900px">
 
-        <table class="table table-borderless" th:object="${bolest}">
+        <table class="table table-borderless" th:object="${bolest}" style="margin-left: 30px">
             <tbody>
             <tr class="border-top">
-                <th width="200px">Ultrasonografski nalaz:</th>
-                <td th:text="*{usgList}"/>
+                <th width="200px" style="padding-top: 30px">Ultrasonografski nalaz:</th>
+                <td th:text="*{usgList}" style="padding-top: 30px"/>
 
             </tr>
-            <br>
+
             <tr>
-                <th>Nalaz u spekulama:</th>
-                <td th:text="*{spekulaOpList}"/>
+                <th style="padding-top: 30px">Nalaz u spekulama:</th>
+                <td th:text="*{spekulaOpList}" style="padding-top: 30px"/>
             </tr>
-            <br>
+
             <tr>
-                <th>Ginekološki palpatorni pregled:</th>
-                <td th:text="*{ginekoloskiOpList}"/>
+                <th style="padding-top: 30px">Ginekološki palpatorni pregled:</th>
+                <td th:text="*{ginekoloskiOpList}" style="padding-top: 30px"/>
             </tr>
-            <br>
+
             <tr>
-                <th>Dijagnoza:</th>
-                <td th:text="*{dijagnozaOpList}"/>
+                <th style="padding-top: 30px">Dijagnoza:</th>
+                <td th:text="*{dijagnozaOpList}" style="padding-top: 30px"/>
             </tr>
+
             <tr>
-                <th>Krvna grupa:</th>
-                <td th:text="*{pacijent.krvnaGrupa}"/>
-            </tr>
-            <tr>
-                <th>RH faktor:</th>
-                <td th:text="*{pacijent.rh}"/>
-            </tr>
-            <br>
-            <tr>
-                <th>Terapija:</th>
-                <td th:text="*{terapijaOpList}"/>
+                <th style="padding-top: 30px">Terapija:</th>
+                <td th:text="*{terapijaOpList}" style="padding-top: 30px"/>
             </tr>
             </tbody>
         </table>
     </div>
     <br>
-    Pacijentkinja obaveštena u skladu sa čl. 11. i 16. zakona o pravima pacijenta.
-    <br><br>
-    <table class="table table-borderless" th:object="${bolest}">
+    <p style="margin-left: 40px">Pacijentkinja obaveštena u skladu sa čl. 11. i 16. zakona o pravima pacijenta.</p>
+
+    <table class="table table-borderless" th:object="${bolest}" style="margin-left: 30px">
         <tbody>
         <tr>
             <td width="85px" style="padding-right: 0px">Novi Sad,</td>
@@ -160,6 +152,11 @@
         </tr>
         </tbody>
     </table>
+<br>
+    <form>
+        <center><input type="button" value="Print" onclick="this.style.display='none';
+                    window.print()" class="btn btn-dark btn-lg"></center>
+    </form>
 </div>
 </body>
 </html>

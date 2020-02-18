@@ -104,7 +104,7 @@ public class PacijentController {
         }else {
             pacijenti.add(pacijent);
         }
-
+        bolestiSelektovanogPacijenta=null;
         savePacijentiDatabase(pacijenti);
         result=pacijenti;
         updateInd=-1;
@@ -184,6 +184,13 @@ public class PacijentController {
         }else{
             return "show-bolest-EUZ2";
         }
+    }
+    //dodavanje pregleda
+    @GetMapping("/pacijent/showFormForAddBolest")
+    public String showFormForAddBolest(Model model){
+        Bolest bolest = new Bolest();
+        model.addAttribute("bolest", bolest);
+        return "add-OP";
     }
 
 }
