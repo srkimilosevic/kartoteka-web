@@ -56,6 +56,7 @@ public class PacijentController {
     @GetMapping("/pacijent")
     public String getPacijent(@RequestParam("tableId") int id, Model model){
         Pacijent pacijent;
+
         if(result!=null){
             pacijent = result.get(id);
         }else {
@@ -186,17 +187,20 @@ public class PacijentController {
         }
     }
     //dodavanje pregleda
-    @GetMapping("/pacijent/showFormForAddBolest")
-    public String showFormForAddBolest(Model model){
+    @GetMapping("/pacijent/showFormForAddBolestOp")
+    public String showFormForAddBolestOp(Model model){
         Bolest bolest = new Bolest();
         model.addAttribute("bolest", bolest);
+        System.out.println(bolest);
         return "add-OP";
     }
-    @PostMapping("/saveBolest")
-    public String saveBolest(@ModelAttribute("bolest") Bolest bolest){
+    @PostMapping("/pacijent/savebolest")
+    public String savebolest(@ModelAttribute("bolest") Bolest bolest){
+        bolest.setVrstaPregledaBolest("OP");
         for(int i=0; i<pacijenti.size(); i++){
             if(pacijenti.get(i).equals(selectedPacijent)){
                 pacijenti.get(i).getBolesti().add(bolest);
+                System.out.println(pacijenti.get(i));
             }
         }
 

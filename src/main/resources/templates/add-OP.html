@@ -17,9 +17,10 @@
     <h3>Podaci o OP</h3>
     <hr>
     <p class="h4 mb-4">Nov OP</p>
-    <form action="#" th:action="@{saveBolest}"
+    <form action="#" th:action="@{savebolest}"
           th:object="${bolest}" method="post">
 
+        <!--
         <textarea type="text" th:field="*{usgList}" style="height: 110px"
                   class="form-control mb-4 col-10" placeholder="Ultrasonografski nalaz"/>
         <textarea type="text" th:field="*{spekulaOpList}" style="height: 110px"
@@ -30,7 +31,9 @@
                   class="form-control mb-4 col-10" placeholder="Dijagnoza"/>
         <textarea type="text" th:field="*{terapijaOpList}" style="height: 110px"
                   class="form-control mb-4 col-10" placeholder="Terapija"/>
-
+        -->
+        <input type="text" th:field="*{usgList}"
+               class="form-control mb-4 col-10" placeholder="Ultrasonografski nalaz">
 
 
         <button type="submit" class="btn btn-info col-2">Sacuvaj</button>

@@ -177,5 +177,11 @@ public class Pacijent {
         return bolesti;
     }
 
-
+    @Override
+    public String toString() {
+        return "Pacijent{" +
+                "imePrezime='" + imePrezime + '\'' +
+                ", datumRodjenja='" + datumRodjenja + '\'' +
+                '}';
+    }
 }
