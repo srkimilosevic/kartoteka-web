@@ -192,5 +192,20 @@ public class PacijentController {
         model.addAttribute("bolest", bolest);
         return "add-OP";
     }
+    @PostMapping("/saveBolest")
+    public String saveBolest(@ModelAttribute("bolest") Bolest bolest){
+        for(int i=0; i<pacijenti.size(); i++){
+            if(pacijenti.get(i).equals(selectedPacijent)){
+                pacijenti.get(i).getBolesti().add(bolest);
+            }
+        }
+
+
+
+        savePacijentiDatabase(pacijenti);
+
+
+        return "redirect:/pacijenti/pacijent";
+    }
 
 }

@@ -20,16 +20,17 @@
     <form action="#" th:action="@{saveBolest}"
           th:object="${bolest}" method="post">
 
-        <input type="text" th:field="*{usgList}" style=""
-               class="form-control mb-4 col-10" placeholder="Ultrasonografski nalaz">
-        <input type="text" th:field="*{spekulaOpList}"
-               class="form-control mb-4 col-4" placeholder="Nalaz u spekulama">
-        <input type="text" th:field="*{ginekoloskiOpList}"
-               class="form-control mb-4 col-4" placeholder="Ginekološki palpatorni pregled">
-        <input type="text" th:field="*{dijagnozaOpList}"
-               class="form-control mb-4 col-4" placeholder="Dijagnoza">
-        <input type="text" th:field="*{terapijaOpList}"
-               class="form-control mb-4 col-4" placeholder="Terapija">
+        <textarea type="text" th:field="*{usgList}" style="height: 110px"
+                  class="form-control mb-4 col-10" placeholder="Ultrasonografski nalaz"/>
+        <textarea type="text" th:field="*{spekulaOpList}" style="height: 110px"
+                  class="form-control mb-4 col-10" placeholder="Nalaz u spekulama"/>
+        <textarea type="text" th:field="*{ginekoloskiOpList}" style="height: 110px"
+                  class="form-control mb-4 col-10" placeholder="Ginekološki palpatorni pregled"/>
+        <textarea type="text" th:field="*{dijagnozaOpList}" style="height: 110px"
+                  class="form-control mb-4 col-10" placeholder="Dijagnoza"/>
+        <textarea type="text" th:field="*{terapijaOpList}" style="height: 110px"
+                  class="form-control mb-4 col-10" placeholder="Terapija"/>
+
 
 
         <button type="submit" class="btn btn-info col-2">Sacuvaj</button>
