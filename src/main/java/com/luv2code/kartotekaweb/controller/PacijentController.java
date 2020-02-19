@@ -26,6 +26,8 @@ public class PacijentController {
     public int updateInd=-1;
     public Pacijent selectedPacijent;
     public List<Bolest> bolestiSelektovanogPacijenta;
+    //za povratak na selektovanog pacijenta nakon dodavanja bolesti, samo u /prikaz
+    public int prikazPacijentaId;
 
 
     @PostConstruct
@@ -65,7 +67,7 @@ public class PacijentController {
         if(pacijent==null){
             throw new RuntimeException("Pacijent nije pronadjen");
         }
-
+        prikazPacijentaId = pacijenti.indexOf(pacijent);
         selectedPacijent=pacijent;
 
         model.addAttribute("pacijent", pacijent);
@@ -195,7 +197,7 @@ public class PacijentController {
         return "add-OP";
     }
     @PostMapping("/pacijent/savebolest")
-    public String savebolest(@ModelAttribute("bolest") Bolest bolest){
+    public String savebolest(@ModelAttribute("bolest") Bolest bolest, @RequestParam("tableId") int id){
         bolest.setVrstaPregledaBolest("OP");
         for(int i=0; i<pacijenti.size(); i++){
             if(pacijenti.get(i).equals(selectedPacijent)){
