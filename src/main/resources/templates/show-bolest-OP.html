@@ -108,6 +108,7 @@
         </table>
     </div>
 
+
     <div style="width: 900px">
 
         <table class="table table-borderless" th:object="${bolest}" style="margin-left: 30px">
@@ -152,11 +153,18 @@
         </tr>
         </tbody>
     </table>
-<br>
+    <br>
     <form>
         <center><input type="button" value="Print" onclick="this.style.display='none';
                     window.print()" class="btn btn-dark btn-lg"></center>
     </form>
+    <form>
+        <center><input type="button" value="Nazad" onclick="history.back()"
+                       style="margin-top: 30px" class="btn btn-dark btn-lg"></center>
+    </form>
 </div>
+
+
+
 </body>
 </html>

@@ -9,8 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Bolest {
 
     private Pacijent pacijent;
-    private int prikazPacijentaId;
-    PacijentController pc;
+
 
     private String datumPregledaBolest, vrstaPregledaBolest;
     private String usgList;
@@ -550,10 +549,7 @@ public class Bolest {
         this.pacijent = pacijent;
     }
 
-    public int getPrikazPacijentaId() {
 
-        return pc.prikazPacijentaId;
-    }
 
 
     @Override

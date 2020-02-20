@@ -3,6 +3,7 @@ package com.luv2code.kartotekaweb.entity;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pacijent {
@@ -177,6 +178,14 @@ public class Pacijent {
         return bolesti;
     }
 
+
+    public void add(Bolest tempBolest){
+        if(bolesti==null){
+            bolesti=new ArrayList<>();
+        }
+        bolesti.add(tempBolest);
+        tempBolest.setPacijent(this);
+    }
     @Override
     public String toString() {
         return "Pacijent{" +

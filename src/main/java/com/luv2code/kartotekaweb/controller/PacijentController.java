@@ -51,7 +51,7 @@ public class PacijentController {
     }
     @GetMapping("/list")
     public String listAll(Model model){
-
+        result=null;
         model.addAttribute("pacijenti", pacijenti);
         return "list-pacijenti";
     }
@@ -197,21 +197,16 @@ public class PacijentController {
         return "add-OP";
     }
     @PostMapping("/pacijent/savebolest")
-    public String savebolest(@ModelAttribute("bolest") Bolest bolest, @RequestParam("tableId") int id){
+    public String savebolest(@ModelAttribute("bolest") Bolest bolest, Model model){
         bolest.setVrstaPregledaBolest("OP");
-        for(int i=0; i<pacijenti.size(); i++){
-            if(pacijenti.get(i).equals(selectedPacijent)){
-                pacijenti.get(i).getBolesti().add(bolest);
-                System.out.println(pacijenti.get(i));
-            }
-        }
 
+        pacijenti.get(prikazPacijentaId).add(bolest);
 
 
         savePacijentiDatabase(pacijenti);
+        model.addAttribute("pacijent", pacijenti.get(prikazPacijentaId));
 
-
-        return "redirect:/pacijenti/pacijent";
+        return "show-pacijent";
     }
 
 }
