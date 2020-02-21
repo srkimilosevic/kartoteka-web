@@ -3,6 +3,7 @@ package com.luv2code.kartotekaweb.controller;
 import com.luv2code.kartotekaweb.entity.Bolest;
 import com.luv2code.kartotekaweb.entity.Pacijent;
 import com.luv2code.kartotekaweb.entity.PersonListWrapper;
+import com.luv2code.kartotekaweb.util.CalendarUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -198,8 +200,9 @@ public class PacijentController {
     }
     @PostMapping("/pacijent/savebolest")
     public String savebolest(@ModelAttribute("bolest") Bolest bolest, Model model){
+        LocalDate localDate = LocalDate.now();
         bolest.setVrstaPregledaBolest("OP");
-
+        bolest.setDatumPregledaBolest(CalendarUtil.parse(localDate));
         pacijenti.get(prikazPacijentaId).add(bolest);
 
 
