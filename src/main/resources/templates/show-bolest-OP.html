@@ -16,9 +16,10 @@
     <style type="text/css" media="print">
         @page {
             size: auto;   /* auto is the initial value */
-            margin: 0;  /* this affects the margin in the printer settings */
+            margin: 4mm 0 5mm 2mm;  /* this affects the margin in the printer settings */
         }
     </style>
+
 </head>
 <body>
 
@@ -108,6 +109,7 @@
         </table>
     </div>
 
+
     <div style="width: 900px">
 
         <table class="table table-borderless" th:object="${bolest}" style="margin-left: 30px">
@@ -152,11 +154,26 @@
         </tr>
         </tbody>
     </table>
-<br>
+    <br>
     <form>
         <center><input type="button" value="Print" onclick="this.style.display='none';
-                    window.print()" class="btn btn-dark btn-lg"></center>
+                    window.print()" class="btn btn-outline-primary btn-lg"></center>
     </form>
+    <style>
+        @media print {
+        .no-print, .no-print *{
+            display: none !important;
+        }}
+    </style>
+    <div class="no-print">
+        <form style="margin-left: 1000px; padding-bottom: 100px">
+            <input type="button" value="Nazad" onclick="history.back()"
+                           style="margin-top: 30px" class="btn btn-dark btn-lg"></center>
+        </form>
+    </div>
 </div>
+
+
+
 </body>
 </html>

@@ -169,8 +169,20 @@
     <br>
     <form>
         <center><input type="button" value="Print" onclick="this.style.display='none';
-                    window.print()" class="btn btn-dark btn-lg"></center>
+                    window.print()" class="btn btn-outline-primary btn-lg"></center>
     </form>
+<style>
+    @media print {
+        .no-print, .no-print *{
+            display: none !important;
+        }}
+</style>
+<div class="no-print">
+    <form style="margin-left: 1000px; padding-bottom: 100px">
+        <input type="button" value="Nazad" onclick="history.back()"
+               style="margin-top: 30px" class="btn btn-dark btn-lg"></center>
+    </form>
+</div>
 </div>
 </div>
 </body>

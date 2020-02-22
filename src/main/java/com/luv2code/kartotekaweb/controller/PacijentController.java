@@ -3,6 +3,7 @@ package com.luv2code.kartotekaweb.controller;
 import com.luv2code.kartotekaweb.entity.Bolest;
 import com.luv2code.kartotekaweb.entity.Pacijent;
 import com.luv2code.kartotekaweb.entity.PersonListWrapper;
+import com.luv2code.kartotekaweb.util.CalendarUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,8 @@ public class PacijentController {
     public int updateInd=-1;
     public Pacijent selectedPacijent;
     public List<Bolest> bolestiSelektovanogPacijenta;
+    //za povratak na selektovanog pacijenta nakon dodavanja bolesti, samo u /prikaz
+    public int prikazPacijentaId;
 
 
     @PostConstruct
@@ -49,7 +53,7 @@ public class PacijentController {
     }
     @GetMapping("/list")
     public String listAll(Model model){
-
+        result=null;
         model.addAttribute("pacijenti", pacijenti);
         return "list-pacijenti";
     }
@@ -65,7 +69,7 @@ public class PacijentController {
         if(pacijent==null){
             throw new RuntimeException("Pacijent nije pronadjen");
         }
-
+        prikazPacijentaId = pacijenti.indexOf(pacijent);
         selectedPacijent=pacijent;
 
         model.addAttribute("pacijent", pacijent);
@@ -195,21 +199,17 @@ public class PacijentController {
         return "add-OP";
     }
     @PostMapping("/pacijent/savebolest")
-    public String savebolest(@ModelAttribute("bolest") Bolest bolest){
+    public String savebolest(@ModelAttribute("bolest") Bolest bolest, Model model){
+        LocalDate localDate = LocalDate.now();
         bolest.setVrstaPregledaBolest("OP");
-        for(int i=0; i<pacijenti.size(); i++){
-            if(pacijenti.get(i).equals(selectedPacijent)){
-                pacijenti.get(i).getBolesti().add(bolest);
-                System.out.println(pacijenti.get(i));
-            }
-        }
-
+        bolest.setDatumPregledaBolest(CalendarUtil.parse(localDate));
+        pacijenti.get(prikazPacijentaId).add(bolest);
 
 
         savePacijentiDatabase(pacijenti);
+        model.addAttribute("pacijent", pacijenti.get(prikazPacijentaId));
 
-
-        return "redirect:/pacijenti/pacijent";
+        return "show-pacijent";
     }
 
 }
