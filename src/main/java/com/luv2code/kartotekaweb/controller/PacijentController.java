@@ -30,6 +30,7 @@ public class PacijentController {
     public List<Bolest> bolestiSelektovanogPacijenta;
     //za povratak na selektovanog pacijenta nakon dodavanja bolesti, samo u /prikaz
     public int prikazPacijentaId;
+    public String bolestIdentifikator;
 
 
     @PostConstruct
@@ -194,22 +195,61 @@ public class PacijentController {
     @GetMapping("/pacijent/showFormForAddBolestOp")
     public String showFormForAddBolestOp(Model model){
         Bolest bolest = new Bolest();
+        bolestIdentifikator = "OP";
         model.addAttribute("bolest", bolest);
-        System.out.println(bolest);
         return "add-OP";
+    }
+    @GetMapping("/pacijent/showFormForAddBolestEuz1")
+    public String showFormForAddBolestEuz1(Model model){
+        Bolest bolest = new Bolest();
+        bolestIdentifikator = "EUZ1";
+        bolest.setSagledanoEuz1List("Očna sočiva, kontinuitet prednjeg trbušnog zida i dijafragme, želudac, MB, " +
+                "kranijum, kičmeni stub, ekstremiteti i četvorokomorni presek srca, bubrezi i " +
+                "bubrežne karlice.");
+        model.addAttribute("bolest", bolest);
+        return "add-Euz1";
+    }
+    @GetMapping("/pacijent/showFormForAddBolestEuz2")
+    public String showFormForAddBolestEuz2(Model model){
+        Bolest bolest = new Bolest();
+        bolestIdentifikator = "EUZ2";
+        bolest.setSagledanoEuz2List("Očna sočiva, kontinuitet prednjeg trbušnog zida i dijafragme, želudac, MB, " +
+                "kranijum, kičmeni stub, ekstremiteti i četvorokomorni presek srca, bubrezi i " +
+                "bubrežne karlice.");
+        model.addAttribute("bolest", bolest);
+        return "add-Euz2";
     }
     @PostMapping("/pacijent/savebolest")
     public String savebolest(@ModelAttribute("bolest") Bolest bolest, Model model){
         LocalDate localDate = LocalDate.now();
-        bolest.setVrstaPregledaBolest("OP");
         bolest.setDatumPregledaBolest(CalendarUtil.parse(localDate));
+        if(bolestIdentifikator.equals("OP")){
+            bolest.setVrstaPregledaBolest("OP");
+        }else if(bolestIdentifikator.equals("EUZ1")){
+            bolest.setVrstaPregledaBolest("EUZ1");
+        }else if(bolestIdentifikator.equals("EUZ2")){
+            bolest.setVrstaPregledaBolest("EUZ2");
+        }
         pacijenti.get(prikazPacijentaId).add(bolest);
 
 
         savePacijentiDatabase(pacijenti);
         model.addAttribute("pacijent", pacijenti.get(prikazPacijentaId));
-
+        bolestIdentifikator=null;
         return "show-pacijent";
+    }
+    @GetMapping("/pacijent/showFormForUpdateBolest")
+    public String showFormForUpdateBolest(@RequestParam("tableId") int id, Model model){
+        Bolest bolest = pacijenti.get(prikazPacijentaId).getBolesti().get(id);
+        model.addAttribute("bolest", bolest);
+        if(bolest.getVrstaPregledaBolest().equals("OP")){
+            return "add-OP";
+        }else if(bolest.getVrstaPregledaBolest().equals("EUZ1")){
+            return "add-Euz1";
+        }else{
+            return "add-Euz2";
+        }
+
     }
 
 }

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Unos novog EUZ1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <br>
+    <h3>Podaci o strukturnom ultrazvučnom pregledu 2 i 3</h3>
+    <hr>
+    <p class="h4 mb-4">Nov strukturni ultrazvučni pregled 2 i 3</p>
+    <form action="#" th:action="@{savebolest}"
+          th:object="${bolest}" method="post">
+
+        <table class="table table-borderless">
+
+            <tbody>
+            <tr>
+                <th style="width: 50px">Vtp:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{vtpEuz2List}"
+                           class="form-control" placeholder="Vtp">
+                </td>
+                <th style="width: 50px">Va:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{vaEuz2List}"
+                           class="form-control" placeholder="Va">
+                </td>
+                <th style="width: 50px">FL:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{flEuz2List}"
+                           class="form-control" placeholder="FL">
+                </td>
+                <th style="width: 150px">Ins. pos.:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{insPosEuz2List}"
+                           class="form-control" placeholder="Ins. pos.">
+                </td>
+            </tr>
+            <tr>
+                <th>TM trudnice:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{tmTrudniceEuz2List}"
+                           class="form-control" placeholder="TM trudnice">
+                </td>
+                <th>Vp:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{vpEuz2List}"
+                           class="form-control" placeholder="Vp">
+                </td>
+                <th>AC:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{acEuz2List}"
+                           class="form-control" placeholder="AC">
+                </td>
+                <th>Plod. teč.:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{plodTecEuz2List}"
+                           class="form-control" placeholder="Plod. teč.">
+                </td>
+            </tr>
+            <tr>
+                <th>TA trudnice:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{taEuz2List}"
+                           class="form-control" placeholder="TA trudnice">
+                </td>
+                <th>IOD:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{iodEuz2List}"
+                           class="form-control" placeholder="IOD">
+                </td>
+                <th>TM:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{tmEuz2List}"
+                           class="form-control" placeholder="TM">
+                </td>
+                <th>Dinamika pokreta ploda:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{dinPokEuz2List}"
+                           class="form-control" placeholder="Dinamika pokreta ploda">
+                </td>
+            </tr>
+            <tr>
+                <th>BPD:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{bpdEuz2List}"
+                           class="form-control" placeholder="BPD">
+                </td>
+                <th>TCD:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{tcdEuz2List}"
+                           class="form-control" placeholder="TCD">
+                </td>
+                <th>TIB:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{tibEuz2List}"
+                           class="form-control" placeholder="TIB">
+                </td>
+                <th>Širina aorte:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{sirinaAorteEuz2List}"
+                           class="form-control" placeholder="Širina aorte">
+                </td>
+            </tr>
+            <tr>
+                <th>Hem:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{hemEuz2List}"
+                           class="form-control" placeholder="Hem">
+                </td>
+                <th>CM:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{cmEuz2List}"
+                           class="form-control" placeholder="CM">
+                </td>
+                <th>FIB:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{fibEuz2List}"
+                           class="form-control" placeholder="FIB">
+                </td>
+                <th>Pupčanik:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{pupcanikEuz2List}"
+                           class="form-control" placeholder="Pupčanik">
+                </td>
+            </tr>
+            <tr>
+                <th>OFD:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{ofdEuz2List}"
+                           class="form-control" placeholder="OFD">
+                </td>
+                <th>NN:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{nnEuz2List}"
+                           class="form-control" placeholder="NN">
+                </td>
+                <th>FHR+:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{fhrEuz2List}"
+                           class="form-control" placeholder="FHR+">
+                </td>
+            </tr>
+            <tr>
+                <th>HC:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{hcEuz2List}"
+                           class="form-control" placeholder="HC">
+                </td>
+                <th>HL:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{hlEuz2List}"
+                           class="form-control" placeholder="HL">
+                </td>
+                <th>Cerviks:</th>
+                <td style="width: 200px">
+                    <input type="text" th:field="*{cerviksEuz2List}"
+                           class="form-control" placeholder="Cerviks">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <b>Sagledani su:</b>
+        <textarea id="bio" name="bio" type="text" th:field="*{sagledanoEuz2List}" style="height: 110px"
+                  class="form-control mb-4 col-10"/>
+        <b>Dijagnoza:</b>
+        <textarea type="text" th:field="*{dijagnozaEuz2List}" style="height: 110px"
+                  class="form-control mb-4 col-10" placeholder="Dijagnoza"/>
+        <b>Terapija:</b>
+        <textarea type="text" th:field="*{terapijaEuz2List}" style="height: 110px"
+                  class="form-control mb-4 col-10" placeholder="Terapija"/>
+
+        <button type="submit" class="btn btn-info col-2">Sacuvaj</button>
+    </form>
+    <hr>
+    <form>
+        <input type="button" value="Nazad" onclick="history.back()" class="btn btn-dark btn-lg">
+    </form>
+</div>
+
+</body>
+</html>

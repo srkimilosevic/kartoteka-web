@@ -83,9 +83,17 @@
     <div style="float: left; width: 400px">
         <h3>Istorija pregleda</h3>
         <hr>
-        <a th:href="@{/pacijenti/pacijent/showFormForAddBolestOp}"
+        <a th:href="@{/pacijenti/pacijent/showFormForAddBolestOp}" style="margin-right: 0px"
            class="btn btn-primary mr-5 mb-4">
             OP
+        </a>
+        <a th:href="@{/pacijenti/pacijent/showFormForAddBolestEuz1}" style="margin-left: -40px"
+           class="btn btn-primary mr-5 mb-4">
+            EUZ1
+        </a>
+        <a th:href="@{/pacijenti/pacijent/showFormForAddBolestEuz2}" style="margin-left: -40px"
+           class="btn btn-primary mr-5 mb-4">
+            EUZ2
         </a>
         <table class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
@@ -106,6 +114,10 @@
                             <td style="padding-right: 2px; padding-left: 2px; padding-bottom: 0px; padding-top: 0px">
                                 <a th:href="@{/pacijenti/pacijent/pregled(tableId=${iterstat.index})}"
                                    class="btn btn-info btn-sm">Prikaz</a>
+                            </td>
+                            <td style="padding-right: 2px; padding-left: 2px; padding-bottom: 0px; padding-top: 0px">
+                                <a th:href="@{/pacijenti/pacijent/showFormForUpdateBolest(tableId=${iterstat.index})}"
+                                   class="btn btn-secondary btn-sm">Izmena</a>
                             </td>
                         </tr>
                         </tbody>
