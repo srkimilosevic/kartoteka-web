@@ -12,11 +12,12 @@ import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
 import java.io.File;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
@@ -31,7 +32,8 @@ public class PacijentController {
     //za povratak na selektovanog pacijenta nakon dodavanja bolesti, samo u /prikaz
     public int prikazPacijentaId;
     public String bolestIdentifikator;
-
+    public int indikatorZaIzmenuPregleda=-1;
+    public String datumZaIzmenu;
 
     @PostConstruct
     public void loadPersonDataFromFile() {
@@ -194,6 +196,7 @@ public class PacijentController {
     //dodavanje pregleda
     @GetMapping("/pacijent/showFormForAddBolestOp")
     public String showFormForAddBolestOp(Model model){
+        indikatorZaIzmenuPregleda=-1;
         Bolest bolest = new Bolest();
         bolestIdentifikator = "OP";
         model.addAttribute("bolest", bolest);
@@ -201,6 +204,7 @@ public class PacijentController {
     }
     @GetMapping("/pacijent/showFormForAddBolestEuz1")
     public String showFormForAddBolestEuz1(Model model){
+        indikatorZaIzmenuPregleda=-1;
         Bolest bolest = new Bolest();
         bolestIdentifikator = "EUZ1";
         bolest.setSagledanoEuz1List("Očna sočiva, kontinuitet prednjeg trbušnog zida i dijafragme, želudac, MB, " +
@@ -211,6 +215,7 @@ public class PacijentController {
     }
     @GetMapping("/pacijent/showFormForAddBolestEuz2")
     public String showFormForAddBolestEuz2(Model model){
+        indikatorZaIzmenuPregleda=-1;
         Bolest bolest = new Bolest();
         bolestIdentifikator = "EUZ2";
         bolest.setSagledanoEuz2List("Očna sočiva, kontinuitet prednjeg trbušnog zida i dijafragme, želudac, MB, " +
@@ -222,26 +227,38 @@ public class PacijentController {
     @PostMapping("/pacijent/savebolest")
     public String savebolest(@ModelAttribute("bolest") Bolest bolest, Model model){
         LocalDate localDate = LocalDate.now();
-        bolest.setDatumPregledaBolest(CalendarUtil.parse(localDate));
-        if(bolestIdentifikator.equals("OP")){
-            bolest.setVrstaPregledaBolest("OP");
-        }else if(bolestIdentifikator.equals("EUZ1")){
-            bolest.setVrstaPregledaBolest("EUZ1");
-        }else if(bolestIdentifikator.equals("EUZ2")){
-            bolest.setVrstaPregledaBolest("EUZ2");
+
+        if(indikatorZaIzmenuPregleda>=0){
+            bolest.setDatumPregledaBolest(datumZaIzmenu);
+            bolest.setVrstaPregledaBolest(bolestIdentifikator);
+            pacijenti.get(prikazPacijentaId).getBolesti().set(indikatorZaIzmenuPregleda, bolest);
+        }else {
+            bolest.setDatumPregledaBolest(CalendarUtil.parse(localDate));
+            if (bolestIdentifikator.equals("OP")) {
+                bolest.setVrstaPregledaBolest("OP");
+            } else if (bolestIdentifikator.equals("EUZ1")) {
+                bolest.setVrstaPregledaBolest("EUZ1");
+            } else if (bolestIdentifikator.equals("EUZ2")) {
+                bolest.setVrstaPregledaBolest("EUZ2");
+            }
+            pacijenti.get(prikazPacijentaId).add(bolest);
         }
-        pacijenti.get(prikazPacijentaId).add(bolest);
+
 
 
         savePacijentiDatabase(pacijenti);
         model.addAttribute("pacijent", pacijenti.get(prikazPacijentaId));
         bolestIdentifikator=null;
+        indikatorZaIzmenuPregleda=-1;
         return "show-pacijent";
     }
     @GetMapping("/pacijent/showFormForUpdateBolest")
     public String showFormForUpdateBolest(@RequestParam("tableId") int id, Model model){
         Bolest bolest = pacijenti.get(prikazPacijentaId).getBolesti().get(id);
         model.addAttribute("bolest", bolest);
+        indikatorZaIzmenuPregleda = id;
+        datumZaIzmenu=bolest.getDatumPregledaBolest();
+        bolestIdentifikator=bolest.getVrstaPregledaBolest();
         if(bolest.getVrstaPregledaBolest().equals("OP")){
             return "add-OP";
         }else if(bolest.getVrstaPregledaBolest().equals("EUZ1")){
@@ -249,6 +266,7 @@ public class PacijentController {
         }else{
             return "add-Euz2";
         }
+
 
     }
 
