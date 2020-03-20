@@ -30,7 +30,7 @@ public class PacijentController {
     public Pacijent selectedPacijent;
     public List<Bolest> bolestiSelektovanogPacijenta;
     //za povratak na selektovanog pacijenta nakon dodavanja bolesti, samo u /prikaz
-    public int prikazPacijentaId;
+    public static int prikazPacijentaId;
     public String bolestIdentifikator;
     public int indikatorZaIzmenuPregleda=-1;
     public String datumZaIzmenu;
@@ -74,7 +74,7 @@ public class PacijentController {
         }
         prikazPacijentaId = pacijenti.indexOf(pacijent);
         selectedPacijent=pacijent;
-
+        result = pacijenti;
         model.addAttribute("pacijent", pacijent);
         return "show-pacijent";
     }
@@ -196,8 +196,10 @@ public class PacijentController {
     //dodavanje pregleda
     @GetMapping("/pacijent/showFormForAddBolestOp")
     public String showFormForAddBolestOp(Model model){
+
         indikatorZaIzmenuPregleda=-1;
         Bolest bolest = new Bolest();
+        bolest.setPacijent(pacijenti.get(prikazPacijentaId));
         bolestIdentifikator = "OP";
         model.addAttribute("bolest", bolest);
         return "add-OP";
@@ -206,6 +208,7 @@ public class PacijentController {
     public String showFormForAddBolestEuz1(Model model){
         indikatorZaIzmenuPregleda=-1;
         Bolest bolest = new Bolest();
+        bolest.setPacijent(pacijenti.get(prikazPacijentaId));
         bolestIdentifikator = "EUZ1";
         bolest.setSagledanoEuz1List("Očna sočiva, kontinuitet prednjeg trbušnog zida i dijafragme, želudac, MB, " +
                 "kranijum, kičmeni stub, ekstremiteti i četvorokomorni presek srca, bubrezi i " +
@@ -217,6 +220,7 @@ public class PacijentController {
     public String showFormForAddBolestEuz2(Model model){
         indikatorZaIzmenuPregleda=-1;
         Bolest bolest = new Bolest();
+        bolest.setPacijent(pacijenti.get(prikazPacijentaId));
         bolestIdentifikator = "EUZ2";
         bolest.setSagledanoEuz2List("Očna sočiva, kontinuitet prednjeg trbušnog zida i dijafragme, želudac, MB, " +
                 "kranijum, kičmeni stub, ekstremiteti i četvorokomorni presek srca, bubrezi i " +
@@ -248,9 +252,10 @@ public class PacijentController {
 
         savePacijentiDatabase(pacijenti);
         model.addAttribute("pacijent", pacijenti.get(prikazPacijentaId));
-        bolestIdentifikator=null;
+        //bolestIdentifikator=null;
         indikatorZaIzmenuPregleda=-1;
         return "show-pacijent";
+        //return "redirect:/pacijenti/pacijent";
     }
     @GetMapping("/pacijent/showFormForUpdateBolest")
     public String showFormForUpdateBolest(@RequestParam("tableId") int id, Model model){
@@ -268,6 +273,14 @@ public class PacijentController {
         }
 
 
+    }
+    @GetMapping("/pacijent/deleteBolest")
+    public String deleteBolest(@RequestParam("tableId") int id, Model model){
+        pacijenti.get(prikazPacijentaId).getBolesti().remove(id);
+        savePacijentiDatabase(pacijenti);
+
+        model.addAttribute("pacijent", pacijenti.get(prikazPacijentaId));
+        return "show-pacijent";
     }
 
 }

@@ -121,7 +121,7 @@
             </tr>
 
             <tr>
-                <th style="padding-top: 30px">Nalaz u spekulama:</th>
+                <th style="padding-top: 30px">Nalaz u spekulima:</th>
                 <td th:text="*{spekulaOpList}" style="padding-top: 30px"/>
             </tr>
 
@@ -166,10 +166,16 @@
         }}
     </style>
     <div class="no-print">
+        <!--
         <form style="margin-left: 1000px; padding-bottom: 100px">
             <input type="button" value="Nazad" onclick="history.back()"
                            style="margin-top: 30px" class="btn btn-dark btn-lg"></center>
         </form>
+        -->
+        <a style="margin-left: 1000px; margin-bottom: 100px"
+           th:href="@{/pacijenti/pacijent(tableId=${bolest.pacijent.id})}"
+           class="btn btn-dark btn-lg">Nazad
+        </a>
     </div>
 </div>
 

@@ -183,8 +183,15 @@
         <button type="submit" class="btn btn-info col-2">Sacuvaj</button>
     </form>
     <hr>
+    <!--
     <form>
         <input type="button" value="Nazad" onclick="history.back()" class="btn btn-dark btn-lg">
+    </form>
+    -->
+    <form>
+        <a th:href="@{/pacijenti/pacijent(tableId=${bolest.pacijent.id})}"
+           class="btn btn-dark btn-lg">Nazad
+        </a>
     </form>
 </div>
 

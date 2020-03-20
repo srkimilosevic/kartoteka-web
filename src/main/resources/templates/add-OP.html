@@ -25,7 +25,7 @@
         <textarea type="text" th:field="*{usgList}" style="height: 110px"
                   class="form-control mb-4 col-10" placeholder="Ultrasonografski nalaz"/>
         <textarea type="text" th:field="*{spekulaOpList}" style="height: 110px"
-                  class="form-control mb-4 col-10" placeholder="Nalaz u spekulama"/>
+                  class="form-control mb-4 col-10" placeholder="Nalaz u spekulima"/>
         <textarea type="text" th:field="*{ginekoloskiOpList}" style="height: 110px"
                   class="form-control mb-4 col-10" placeholder="Ginekološki palpatorni pregled"/>
         <textarea type="text" th:field="*{dijagnozaOpList}" style="height: 110px"
@@ -40,8 +40,15 @@
         <button type="submit" class="btn btn-info col-2">Sacuvaj</button>
     </form>
     <hr>
+    <!--
     <form>
         <input type="button" value="Nazad" onclick="history.back()" class="btn btn-dark btn-lg">
+    </form>
+    -->
+    <form>
+    <a th:href="@{/pacijenti/pacijent(tableId=${bolest.pacijent.id})}"
+       class="btn btn-dark btn-lg">Nazad
+    </a>
     </form>
 </div>
 

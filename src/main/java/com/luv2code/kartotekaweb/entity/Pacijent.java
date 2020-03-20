@@ -1,12 +1,20 @@
 package com.luv2code.kartotekaweb.entity;
 
 
+import com.luv2code.kartotekaweb.controller.PacijentController;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pacijent {
+
+    private int id;
+
+    public int getId() {
+        return PacijentController.prikazPacijentaId;
+    }
 
     private String imePrezime;
     private String datumRodjenja;

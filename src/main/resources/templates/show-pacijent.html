@@ -93,7 +93,7 @@
         </a>
         <a th:href="@{/pacijenti/pacijent/showFormForAddBolestEuz2}" style="margin-left: -40px"
            class="btn btn-primary mr-5 mb-4">
-            EUZ2
+            EUZ 2 i 3
         </a>
         <table class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
@@ -118,6 +118,12 @@
                             <td style="padding-right: 2px; padding-left: 2px; padding-bottom: 0px; padding-top: 0px">
                                 <a th:href="@{/pacijenti/pacijent/showFormForUpdateBolest(tableId=${iterstat.index})}"
                                    class="btn btn-secondary btn-sm">Izmena</a>
+                            </td>
+                            <td style="padding-right: 2px; padding-left: 2px; padding-bottom: 0px; padding-top: 0px">
+                                <a th:href="@{/pacijenti/pacijent/deleteBolest(tableId=${iterstat.index})}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="if (!(confirm('DA LI STE SIGURNI DA ZELITE DA IZBRISETE OVAJ PREGLED?')))
+                                                    return false">Brisanje</a>
                             </td>
                         </tr>
                         </tbody>
